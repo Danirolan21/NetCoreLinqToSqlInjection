@@ -1,4 +1,5 @@
 using NetCoreLinqToSqlInjection.Models;
+using NetCoreLinqToSqlInjection.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ car.Velocidad = 0;
 car.VelocidadMaxima = 220;
 //PARA ENVIAR NUUESTRO OBJETO PERSONALIZADO, SE UTILIZA LAMBDA
 builder.Services.AddSingleton<ICoche, Coche>(x => car);
+builder.Services.AddTransient<RepositoryDoctoresSQLServer>();
 
 var app = builder.Build();
 
@@ -37,7 +39,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Doctores}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
